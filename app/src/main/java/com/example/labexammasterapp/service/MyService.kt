@@ -1,29 +1,37 @@
-// ==== IMPORTANT FOR COPY-PASTING ====
-// If you are copying this file into a NEW project:
-// 1. DO NOT copy the package line below. Keep your own package line!
-// 2. DO NOT copy the import com.example.labexammasterapp.R line.
-// 3. Ensure your layouts match the names used here.
-// ===================================
-
 package com.example.labexammasterapp.service
 
 import android.app.Service
 import android.content.Intent
+import android.media.MediaPlayer
 import android.os.IBinder
+import android.provider.Settings
 import android.widget.Toast
 
 class MyService : Service() {
+
+    private var player: MediaPlayer? = null
+
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
-        Toast.makeText(this, "Service Started", Toast.LENGTH_SHORT).show()
-        // ===== EXAM MODIFICATION AREA =====
-        // Do background work here
-        // ==================================
+        if (player == null) {
+            // ===== EXAM MODIFICATION AREA =====
+            // Option 1 (default): plays the device ringtone — no extra files needed
+            player = MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI)
+            // Option 2: play your own mp3 — add file to res/raw/ and replace 'your_song'
+            // player = MediaPlayer.create(this, R.raw.your_song)
+            // ==================================
+            player?.isLooping = true
+            player?.start()
+        }
+        Toast.makeText(this, "Service Started - Music Playing", Toast.LENGTH_SHORT).show()
         return START_STICKY
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Toast.makeText(this, "Service Stopped", Toast.LENGTH_SHORT).show()
+        player?.stop()
+        player?.release()
+        player = null
+        Toast.makeText(this, "Service Stopped - Music Stopped", Toast.LENGTH_SHORT).show()
     }
 
     override fun onBind(intent: Intent?): IBinder? = null

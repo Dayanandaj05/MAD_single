@@ -12,20 +12,22 @@ import android.view.View
 import android.widget.Button
 import android.widget.RatingBar
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class RatingFragment : Fragment(R.layout.fragment_rating) {
+class RatingFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val ratingBar = view.findViewById<RatingBar>(R.id.ratingBar)
-        val btnSubmit = view.findViewById<Button>(R.id.btnSubmitRating)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_rating)
+        
+        val ratingBar = findViewById<RatingBar>(R.id.ratingBar)
+        val btnSubmit = findViewById<Button>(R.id.btnSubmitRating)
 
         btnSubmit.setOnClickListener {
             // ===== EXAM MODIFICATION AREA =====
             val stars = ratingBar.rating
-            Toast.makeText(context, "You rated: $stars stars", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "You rated: $stars stars", Toast.LENGTH_SHORT).show()
             // ==================================
         }
     }

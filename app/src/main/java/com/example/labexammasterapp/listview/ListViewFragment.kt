@@ -12,25 +12,27 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class ListViewFragment : Fragment(R.layout.fragment_listview) {
+class ListViewFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val listView = view.findViewById<ListView>(R.id.listViewItems)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_listview)
+        
+        val listView = findViewById<ListView>(R.id.listViewItems)
 
         // ===== EXAM MODIFICATION AREA =====
         // Change array items to what question specifies
         val items = arrayOf("Apple", "Banana", "Orange", "Grapes", "Mango")
         // ==================================
 
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, items)
+        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
         listView.adapter = adapter
 
         listView.setOnItemClickListener { _, _, position, _ ->
-            Toast.makeText(context, "Clicked: ${items[position]}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Clicked: ${items[position]}", Toast.LENGTH_SHORT).show()
         }
     }
 }

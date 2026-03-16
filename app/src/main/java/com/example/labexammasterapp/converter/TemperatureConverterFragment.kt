@@ -12,16 +12,18 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class TemperatureConverterFragment : Fragment(R.layout.fragment_converter) {
+class TemperatureConverterFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val editCelsius = view.findViewById<EditText>(R.id.editCelsius)
-        val btnConvert = view.findViewById<Button>(R.id.btnConvert)
-        val txtFahrenheit = view.findViewById<TextView>(R.id.txtFahrenheit)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_converter)
+        
+        val editCelsius = findViewById<EditText>(R.id.editCelsius)
+        val btnConvert = findViewById<Button>(R.id.btnConvert)
+        val txtFahrenheit = findViewById<TextView>(R.id.txtFahrenheit)
 
         btnConvert.setOnClickListener {
             val celsiusText = editCelsius.text.toString()

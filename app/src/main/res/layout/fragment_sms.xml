@@ -3,16 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center"
     android:padding="16dp">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SMS Receiver Example"
+        android:text="SMS Receiver"
         android:textSize="24sp"
         android:textStyle="bold"
-        android:layout_marginBottom="24dp"/>
+        android:layout_marginBottom="16dp"/>
 
-<TextView android:layout_width='wrap_content' android:layout_height='wrap_content' android:text='Send an SMS to emulator to test receiver' />
+    <TextView
+        android:id="@+id/tvSmsDisplay"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Waiting for SMS..."
+        android:textSize="16sp"
+        android:padding="12dp"
+        android:background="#F5F5F5"
+        android:lineSpacingExtra="4dp"/>
+
 </LinearLayout>

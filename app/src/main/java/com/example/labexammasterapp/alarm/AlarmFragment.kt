@@ -16,34 +16,36 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class AlarmFragment : Fragment(R.layout.fragment_alarm) {
+class AlarmFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_alarm)
+        
 
-        val editSeconds = view.findViewById<EditText>(R.id.editSeconds)
-        val btnSetAlarm = view.findViewById<Button>(R.id.btnSetAlarm)
+        val editSeconds = findViewById<EditText>(R.id.editSeconds)
+        val btnSetAlarm = findViewById<Button>(R.id.btnSetAlarm)
 
         btnSetAlarm.setOnClickListener {
             val seconds = editSeconds.text.toString().toIntOrNull() ?: 5
 
             // Setup Intent to alarm receiver
-            val intent = Intent(requireContext(), AlarmReceiver::class.java)
+            val intent = Intent(this, AlarmReceiver::class.java)
             val pendingIntent = PendingIntent.getBroadcast(
-                requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
+                this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE
             )
 
             // ===== EXAM MODIFICATION AREA =====
             // Change the delay time or the alarm type below
             // ==================================
-            val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            val alarmManager = this.getSystemService(Context.ALARM_SERVICE) as AlarmManager
             val triggerTime = System.currentTimeMillis() + (seconds * 1000)
             
             alarmManager.setExact(AlarmManager.RTC_WAKEUP, triggerTime, pendingIntent)
-            Toast.makeText(context, "Alarm set for $seconds seconds", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Alarm set for $seconds seconds", Toast.LENGTH_SHORT).show()
         }
     }
 }

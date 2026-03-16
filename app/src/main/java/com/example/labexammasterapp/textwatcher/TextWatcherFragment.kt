@@ -16,18 +16,20 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class TextWatcherFragment : Fragment(R.layout.fragment_text_watcher) {
+class TextWatcherFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_text_watcher)
         
-        val tvLivePreview = view.findViewById<TextView>(R.id.tvLivePreview)
-        val etNumber1 = view.findViewById<EditText>(R.id.etNumber1)
-        val etNumber2 = view.findViewById<EditText>(R.id.etNumber2)
-        val btnSendData = view.findViewById<Button>(R.id.btnSendData)
+        
+        val tvLivePreview = findViewById<TextView>(R.id.tvLivePreview)
+        val etNumber1 = findViewById<EditText>(R.id.etNumber1)
+        val etNumber2 = findViewById<EditText>(R.id.etNumber2)
+        val btnSendData = findViewById<Button>(R.id.btnSendData)
 
         // ===== EXAM MODIFICATION AREA =====
         // addTextChangedListener: 3 methods must ALL be implemented (even if empty)
@@ -62,11 +64,11 @@ class TextWatcherFragment : Fragment(R.layout.fragment_text_watcher) {
             val s1 = etNumber1.text.toString().trim()
             val s2 = etNumber2.text.toString().trim()
             if (s1.isEmpty() || s2.isEmpty()) { 
-                Toast.makeText(requireContext(), "Fill both fields", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Fill both fields", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener 
             }
             
-            val intent = Intent(requireContext(), TextWatcherResultActivity::class.java)
+            val intent = Intent(this, TextWatcherResultActivity::class.java)
             intent.putExtra("NUM1", s1)
             intent.putExtra("NUM2", s2)
             startActivity(intent)

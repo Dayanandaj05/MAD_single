@@ -13,17 +13,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class DialerFragment : Fragment(R.layout.fragment_dialer) {
+class DialerFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_dialer)
+        
 
         // Find the input box and button from the layout
-        val editPhone = view.findViewById<EditText>(R.id.editPhone)
-        val btnCall = view.findViewById<Button>(R.id.btnCall)
+        val editPhone = findViewById<EditText>(R.id.editPhone)
+        val btnCall = findViewById<Button>(R.id.btnCall)
 
         // When the button is clicked, run this code
         btnCall.setOnClickListener {

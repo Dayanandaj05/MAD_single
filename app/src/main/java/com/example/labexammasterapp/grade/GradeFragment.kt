@@ -12,17 +12,19 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class GradeFragment : Fragment(R.layout.fragment_grade) {
+class GradeFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_grade)
+        
 
-        val editMarks = view.findViewById<EditText>(R.id.editMarks)
-        val btnCalculate = view.findViewById<Button>(R.id.btnCalculate)
-        val txtResult = view.findViewById<TextView>(R.id.txtResult)
+        val editMarks = findViewById<EditText>(R.id.editMarks)
+        val btnCalculate = findViewById<Button>(R.id.btnCalculate)
+        val txtResult = findViewById<TextView>(R.id.txtResult)
 
         btnCalculate.setOnClickListener {
             val marksText = editMarks.text.toString()

@@ -12,18 +12,20 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class EmailFragment : Fragment(R.layout.fragment_email) {
+class EmailFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_email)
+        
 
-        val editEmail = view.findViewById<EditText>(R.id.editEmail)
-        val editSubject = view.findViewById<EditText>(R.id.editSubject)
-        val editMessage = view.findViewById<EditText>(R.id.editMessage)
-        val btnSend = view.findViewById<Button>(R.id.btnSend)
+        val editEmail = findViewById<EditText>(R.id.editEmail)
+        val editSubject = findViewById<EditText>(R.id.editSubject)
+        val editMessage = findViewById<EditText>(R.id.editMessage)
+        val btnSend = findViewById<Button>(R.id.btnSend)
 
         btnSend.setOnClickListener {
             val emailAddress = editEmail.text.toString()

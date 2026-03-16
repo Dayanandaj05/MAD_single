@@ -11,14 +11,16 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class BroadcastFragment : Fragment(R.layout.fragment_broadcast) {
+class BroadcastFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val btnSendBroadcast = view.findViewById<Button>(R.id.btnSendBroadcast)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_broadcast)
+        
+        val btnSendBroadcast = findViewById<Button>(R.id.btnSendBroadcast)
 
         btnSendBroadcast.setOnClickListener {
             // ===== EXAM MODIFICATION AREA =====
@@ -26,7 +28,7 @@ class BroadcastFragment : Fragment(R.layout.fragment_broadcast) {
             // ==================================
             val intent = Intent("com.example.CUSTOM_ACTION")
             intent.putExtra("message", "Hello from Broadcast!")
-            requireContext().sendBroadcast(intent)
+            this.sendBroadcast(intent)
         }
     }
 }

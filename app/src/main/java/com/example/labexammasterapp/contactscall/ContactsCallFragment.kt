@@ -19,10 +19,10 @@ import android.widget.SimpleCursorAdapter
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class ContactsCallFragment : Fragment(R.layout.fragment_contacts_call) {
+class ContactsCallFragment : AppCompatActivity() {
 
     private lateinit var lvContactsCall: ListView
     private var phoneNumberToCall: String = ""
@@ -32,12 +32,14 @@ class ContactsCallFragment : Fragment(R.layout.fragment_contacts_call) {
         ContactsContract.CommonDataKinds.Phone._ID
     )
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_contacts_call)
         
-        lvContactsCall = view.findViewById(R.id.lvContactsCall)
+        
+        lvContactsCall = findViewById(R.id.lvContactsCall)
 
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_CONTACTS) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.READ_CONTACTS), 301)
         } else {
             loadContacts()
@@ -62,17 +64,17 @@ class ContactsCallFragment : Fragment(R.layout.fragment_contacts_call) {
         val from = arrayOf(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME, ContactsContract.CommonDataKinds.Phone.NUMBER)
         val to = intArrayOf(android.R.id.text1, android.R.id.text2)
         
-        val cursor = requireContext().contentResolver.query(
+        val cursor = this.contentResolver.query(
             ContactsContract.CommonDataKinds.Phone.CONTENT_URI, cols, null, null,
             ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME
         )
         
-        val adapter = SimpleCursorAdapter(requireContext(), android.R.layout.simple_list_item_2, cursor, from, to, 0)
+        val adapter = SimpleCursorAdapter(this, android.R.layout.simple_list_item_2, cursor, from, to, 0)
         lvContactsCall.adapter = adapter
     }
 
     private fun attemptCall() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), 302)
         } else {
             val callIntent = Intent(Intent.ACTION_CALL)
@@ -90,7 +92,7 @@ class ContactsCallFragment : Fragment(R.layout.fragment_contacts_call) {
                 attemptCall()
             }
         } else {
-            Toast.makeText(requireContext(), "Permission denied", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
         }
     }
 }

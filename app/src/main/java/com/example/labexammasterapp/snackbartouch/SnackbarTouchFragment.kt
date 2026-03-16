@@ -14,19 +14,21 @@ import android.view.View
 import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 import com.google.android.material.snackbar.Snackbar
 
-class SnackbarTouchFragment : Fragment(R.layout.fragment_snackbar_touch) {
+class SnackbarTouchFragment : AppCompatActivity() {
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_snackbar_touch)
         
-        val tvSnackTarget = view.findViewById<TextView>(R.id.tvSnackTarget)
-        val tvTouchTarget = view.findViewById<TextView>(R.id.tvTouchTarget)
-        val tvTouchStatus = view.findViewById<TextView>(R.id.tvTouchStatus)
-        val btnOpenUrl = view.findViewById<Button>(R.id.btnOpenUrl)
+        
+        val tvSnackTarget = findViewById<TextView>(R.id.tvSnackTarget)
+        val tvTouchTarget = findViewById<TextView>(R.id.tvTouchTarget)
+        val tvTouchStatus = findViewById<TextView>(R.id.tvTouchStatus)
+        val btnOpenUrl = findViewById<Button>(R.id.btnOpenUrl)
 
         // ===== EXAM MODIFICATION AREA =====
         // Snackbar vs Toast:
@@ -47,7 +49,7 @@ class SnackbarTouchFragment : Fragment(R.layout.fragment_snackbar_touch) {
 
         tvSnackTarget.setOnLongClickListener {
             tvSnackTarget.textSize = 30f
-            Toast.makeText(requireContext(), "Long press detected!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Long press detected!", Toast.LENGTH_SHORT).show()
             true  // must return true to consume the event
             // ===== EXAM MOD: Change textSize value or do something else on long press =====
         }

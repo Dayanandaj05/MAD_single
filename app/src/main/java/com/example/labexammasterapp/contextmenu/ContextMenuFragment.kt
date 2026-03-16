@@ -18,15 +18,17 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.appcompat.app.AppCompatActivity
 import com.example.labexammasterapp.R
 
-class ContextMenuFragment : Fragment(R.layout.fragment_context_menu) {
+class ContextMenuFragment : AppCompatActivity() {
 
     private lateinit var tvPhoneNumber: TextView
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.fragment_context_menu)
+        
         
         // ===== EXAM MODIFICATION AREA =====
         // Context Menu = menu that appears on LONG PRESS (not a button press)
@@ -40,14 +42,14 @@ class ContextMenuFragment : Fragment(R.layout.fragment_context_menu) {
         // isAppInstalled() — reusable pattern to check if any app exists before opening it
         // ==================================
 
-        tvPhoneNumber = view.findViewById(R.id.tvPhoneNumber)
+        tvPhoneNumber = findViewById(R.id.tvPhoneNumber)
         registerForContextMenu(tvPhoneNumber)
         // ===== EXAM MOD: Change the number in the TextView or make it an EditText for user input =====
     }
 
     override fun onCreateContextMenu(menu: ContextMenu, v: View, menuInfo: ContextMenu.ContextMenuInfo?) {
         super.onCreateContextMenu(menu, v, menuInfo)
-        requireActivity().menuInflater.inflate(R.menu.context_menu, menu)
+        this.menuInflater.inflate(R.menu.context_menu, menu)
         menu.setHeaderTitle("Choose action for: ${tvPhoneNumber.text}")
     }
 
@@ -74,8 +76,8 @@ class ContextMenuFragment : Fragment(R.layout.fragment_context_menu) {
     }
 
     private fun makeCall(number: String) {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.CALL_PHONE), 401)
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CALL_PHONE), 401)
         } else {
             val intent = Intent(Intent.ACTION_CALL)
             intent.data = Uri.parse("tel:$number")
@@ -90,14 +92,14 @@ class ContextMenuFragment : Fragment(R.layout.fragment_context_menu) {
             intent.data = Uri.parse("https://api.whatsapp.com/send?phone=91" + number + "&text=Hello!")
             startActivity(intent)
         } else {
-            Toast.makeText(requireContext(), "WhatsApp not installed", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "WhatsApp not installed", Toast.LENGTH_SHORT).show()
         }
         // ===== EXAM MOD: Change &text=Hello! to whatever pre-filled message the question wants =====
     }
 
     private fun isAppInstalled(packageName: String): Boolean {
         return try {
-            requireContext().packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
+            this.packageManager.getPackageInfo(packageName, PackageManager.GET_ACTIVITIES)
             true
         } catch (e: PackageManager.NameNotFoundException) {
             false
@@ -110,7 +112,7 @@ class ContextMenuFragment : Fragment(R.layout.fragment_context_menu) {
         if (requestCode == 401 && grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
             makeCall(tvPhoneNumber.text.toString())
         } else {
-            Toast.makeText(requireContext(), "Call permission denied", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Call permission denied", Toast.LENGTH_SHORT).show()
         }
     }
 }
