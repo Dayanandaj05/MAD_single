@@ -11,24 +11,32 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.EditText
+import androidx.fragment.app.Fragment
 import com.example.labexammasterapp.R
 
-class BroadcastFragment : AppCompatActivity() {
+class BroadcastFragment : Fragment(R.layout.fragment_broadcast) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_broadcast)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         
-        val btnSendBroadcast = findViewById<Button>(R.id.btnSendBroadcast)
+        val editCustomMessage = view.findViewById<EditText>(R.id.editCustomMessage)
+        val btnSendBroadcast = view.findViewById<Button>(R.id.btnSendBroadcast)
 
         btnSendBroadcast.setOnClickListener {
+            val message = editCustomMessage.text.toString()
+
             // ===== EXAM MODIFICATION AREA =====
-            // Change custom action name if question specifies
+            // Change the action string to whatever the question asks for
+            // e.g., "com.myexam.CUSTOM_EVENT"
+            // Make sure the action name matched exactly inside AndroidManifest.xml
             // ==================================
+
             val intent = Intent("com.example.CUSTOM_ACTION")
-            intent.putExtra("message", "Hello from Broadcast!")
-            this.sendBroadcast(intent)
+            intent.putExtra("MESSAGE", message)
+            intent.setPackage(requireContext().packageName) // Needed for Android 8.0+ implicit broadcasts
+            
+            requireContext().sendBroadcast(intent)
         }
     }
 }

@@ -11,20 +11,19 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Button
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.labexammasterapp.R
 
-class ToastFragment : AppCompatActivity() {
+class ToastFragment : Fragment(R.layout.fragment_toast) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_toast)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         
-        val btnShowToast = findViewById<Button>(R.id.btnShowToast)
+        val btnShowToast = view.findViewById<Button>(R.id.btnShowToast)
 
         btnShowToast.setOnClickListener {
             // ===== EXAM MODIFICATION AREA =====
-            Toast.makeText(this, "Simple Toast Message!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Simple Toast Message!", Toast.LENGTH_SHORT).show()
             // ==================================
         }
     }

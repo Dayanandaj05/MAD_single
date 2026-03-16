@@ -19,26 +19,24 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.labexammasterapp.R
 
-class InlineSmsFragment : AppCompatActivity() {
+class InlineSmsFragment : Fragment(R.layout.fragment_inline_sms) {
 
     private var smsReceiver: BroadcastReceiver? = null
     private lateinit var tvStatus: TextView
     private lateinit var tvSmsContent: TextView
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_inline_sms)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         
-        
-        tvStatus = findViewById(R.id.tvStatus)
-        tvSmsContent = findViewById(R.id.tvSmsContent)
+        tvStatus = view.findViewById(R.id.tvStatus)
+        tvSmsContent = view.findViewById(R.id.tvSmsContent)
 
         // Check permission before setting up
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECEIVE_SMS), 200)
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.RECEIVE_SMS), 200)
         }
     }
 
@@ -59,26 +57,26 @@ class InlineSmsFragment : AppCompatActivity() {
                         
                         tvStatus.text = "SMS Received from: $sender"
                         tvSmsContent.text = body
-                        Toast.makeText(this, body, Toast.LENGTH_LONG).show()
+                        Toast.makeText(context, body, Toast.LENGTH_LONG).show()
                     }
                 }
             }
         }
         
         val intentFilter = IntentFilter("android.provider.Telephony.SMS_RECEIVED")
-        this.registerReceiver(smsReceiver, intentFilter)
+        requireContext().registerReceiver(smsReceiver, intentFilter)
     }
 
     override fun onResume() {
         super.onResume()
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.RECEIVE_SMS) == PackageManager.PERMISSION_GRANTED) {
             setupSmsReceiver()
         }
     }
 
     override fun onPause() {
         super.onPause()
-        smsReceiver?.let { this.unregisterReceiver(it) }
+        smsReceiver?.let { requireContext().unregisterReceiver(it) }
         smsReceiver = null
     }
 }

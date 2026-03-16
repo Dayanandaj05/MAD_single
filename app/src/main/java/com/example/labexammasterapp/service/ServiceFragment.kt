@@ -11,25 +11,30 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import android.widget.Button
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.labexammasterapp.R
 
-class ServiceFragment : AppCompatActivity() {
+class ServiceFragment : Fragment(R.layout.fragment_service) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_service)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         
-        val btnStart = findViewById<Button>(R.id.btnStartService)
-        val btnStop = findViewById<Button>(R.id.btnStopService)
+        val btnStart = view.findViewById<Button>(R.id.btnStartService)
+        val btnStop = view.findViewById<Button>(R.id.btnStopService)
 
         btnStart.setOnClickListener {
-            val intent = Intent(this, MyService::class.java)
-            this.startService(intent)
+            // ===== EXAM MODIFICATION AREA =====
+            // Start the service to run in the background
+            val intent = Intent(requireContext(), MyService::class.java)
+            requireContext().startService(intent)
+            // ==================================
         }
+
         btnStop.setOnClickListener {
-            val intent = Intent(this, MyService::class.java)
-            this.stopService(intent)
+            // ===== EXAM MODIFICATION AREA =====
+            val intent = Intent(requireContext(), MyService::class.java)
+            requireContext().stopService(intent)
+            // ==================================
         }
     }
 }

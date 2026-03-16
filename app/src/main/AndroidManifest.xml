@@ -33,25 +33,27 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        
         <activity android:name=".textwatcher.TextWatcherResultActivity"/>
         <activity android:name=".registration.ResultActivity"/>
         <activity android:name=".menu.MenuActivity"/>
-
+        <activity android:name=".contactscall.ContactsCallFragment"/>
+        <activity android:name=".contextmenu.ContextMenuFragment"/>
+        
         <receiver android:name=".sms.SmsReceiver" android:exported="true">
             <intent-filter android:priority="999">
                 <action android:name="android.provider.Telephony.SMS_RECEIVED" />
             </intent-filter>
         </receiver>
-
+        
         <receiver android:name=".broadcast.BroadcastReceiverExample" android:exported="true">
             <intent-filter>
                 <action android:name="com.example.CUSTOM_ACTION" />
             </intent-filter>
         </receiver>
-
+        
         <receiver android:name=".alarm.AlarmReceiver"/>
-
+        
         <service android:name=".service.MyService"/>
         <service android:name=".music.MusicService"/>
 

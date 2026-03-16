@@ -12,34 +12,45 @@ import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.labexammasterapp.R
 
-class GradeFragment : AppCompatActivity() {
+class GradeFragment : Fragment(R.layout.fragment_grade) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_grade)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         
-
-        val editMarks = findViewById<EditText>(R.id.editMarks)
-        val btnCalculate = findViewById<Button>(R.id.btnCalculate)
-        val txtResult = findViewById<TextView>(R.id.txtResult)
+        val editMarks = view.findViewById<EditText>(R.id.editMarks)
+        val btnCalculate = view.findViewById<Button>(R.id.btnCalculate)
+        val txtResult = view.findViewById<TextView>(R.id.txtResult)
 
         btnCalculate.setOnClickListener {
-            val marksText = editMarks.text.toString()
-            val marks = marksText.toIntOrNull() ?: 0
+            // Read what the user typed and convert it to a Number
+            val markText = editMarks.text.toString()
+            val marks = markText.toIntOrNull()
+
+            if (marks == null) {
+                txtResult.text = "Please enter valid marks"
+                return@setOnClickListener
+            }
 
             // ===== EXAM MODIFICATION AREA =====
-            // Change the grading rules here if the question gives different marks
-            var grade = ""
-            if (marks >= 90) { grade = "A" }
-            else if (marks >= 80) { grade = "B" }
-            else if (marks >= 70) { grade = "C" }
-            else { grade = "Fail" }
+            // Change these grade boundaries to match exam question
+            // Example: "If marks > 90 print A+"
             // ==================================
+            val grade = if (marks >= 90) {
+                "A+"
+            } else if (marks >= 80) {
+                "A"
+            } else if (marks >= 70) {
+                "B"
+            } else if (marks >= 60) {
+                "C"
+            } else {
+                "Fail"
+            }
 
-            txtResult.text = "Your Grade: $grade"
+            txtResult.text = "Grade: $grade"
         }
     }
 }

@@ -12,27 +12,35 @@ import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import com.example.labexammasterapp.R
 
-class ListViewFragment : AppCompatActivity() {
+class ListViewFragment : Fragment(R.layout.fragment_listview) {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_listview)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         
-        val listView = findViewById<ListView>(R.id.listViewItems)
+        val listView = view.findViewById<ListView>(R.id.myListView)
 
         // ===== EXAM MODIFICATION AREA =====
-        // Change array items to what question specifies
-        val items = arrayOf("Apple", "Banana", "Orange", "Grapes", "Mango")
+        val dataList = arrayOf("Apple", "Banana", "Cherry", "Mango", "Orange")
         // ==================================
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_list_item_1, items)
+        // ArrayAdapter converts our text array into visual list items
+        val adapter = ArrayAdapter(
+            requireContext(),
+            android.R.layout.simple_list_item_1, // Default Android row layout
+            dataList
+        )
+        
         listView.adapter = adapter
 
-        listView.setOnItemClickListener { _, _, position, _ ->
-            Toast.makeText(this, "Clicked: ${items[position]}", Toast.LENGTH_SHORT).show()
+        // Listen for when a user clicks an item
+        listView.setOnItemClickListener { parent, itemView, position, id ->
+            // ===== EXAM MODIFICATION AREA =====
+            val clickedItem = dataList[position]
+            Toast.makeText(requireContext(), "You clicked: $clickedItem", Toast.LENGTH_SHORT).show()
+            // ==================================
         }
     }
 }
