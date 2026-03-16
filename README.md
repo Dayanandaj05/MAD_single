@@ -815,4 +815,330 @@ override fun onPause()   { unregisterReceiver(otpReceiver) }
 
 ---
 
-*PSG College of Technology · MCA Mobile App Dev Lab · Good Luck! 🎓*
+---
+
+# 📖 EXAM QUICK REFERENCE GUIDE
+
+---
+
+## 🔍 KEYWORD SEARCH — What Question = What Folder
+
+Read your exam question, find a word below, open that folder.
+
+### Alarms & Notifications
+| Question says... | Open this |
+|---|---|
+| Alarm / Reminder / Schedule / Timer | `alarm/AlarmFragment.kt` |
+| Notification / Status bar alert | `notification/NotificationFragment.kt` |
+
+### Communication
+| Question says... | Open this |
+|---|---|
+| SMS / Text message / OTP / Auto-fill | `sms/SmsFragment.kt` + `SmsReceiver.kt` |
+| SMS inline / Register receiver in screen | `inlinesms/InlineSmsFragment.kt` |
+| Email / Send mail / Compose | `email/EmailFragment.kt` |
+| WhatsApp / Send WhatsApp | `whatsapp/WhatsAppFragment.kt` |
+| Broadcast / Send signal / Custom action | `broadcast/BroadcastFragment.kt` |
+
+### Phone & Contacts
+| Question says... | Open this |
+|---|---|
+| Dial / Call / Phone number / Open dialer | `dialer/DialerFragment.kt` |
+| Contacts / Phone book / Read contacts | `contacts/ContactsFragment.kt` |
+| Contacts + tap to call directly | `contactscall/ContactsCallFragment.kt` |
+| Context menu / Long press menu | `contextmenu/ContextMenuFragment.kt` |
+
+### UI & Layouts
+| Question says... | Open this |
+|---|---|
+| Toast / Simple popup | `extras/ToastFragment.kt` |
+| Snackbar / Long press / Touch / Drag | `snackbartouch/SnackbarTouchFragment.kt` |
+| Rating / Stars / Feedback | `feedback/RatingFragment.kt` |
+| List / ListView / Display items | `listview/ListViewFragment.kt` |
+| Image toggle / Change image on click | `imagetoggle/ImageToggleFragment.kt` |
+| Visiting card / Static layout | `visitingcard/VisitingCardFragment.kt` |
+
+### Forms & Input
+| Question says... | Open this |
+|---|---|
+| Registration form / Spinner / RadioButton / CheckBox / DatePicker | `registration/RegistrationFragment.kt` |
+| TextWatcher / Live typing / Pass data to next screen | `textwatcher/TextWatcherFragment.kt` |
+
+### Math & Logic
+| Question says... | Open this |
+|---|---|
+| Calculator / Add / Subtract / Multiply / Divide | `calculator/CalculatorFragment.kt` |
+| Grade / Marks / Pass or Fail | `grade/GradeFragment.kt` |
+| Convert / Temperature / Celsius / Fahrenheit | `converter/TemperatureConverterFragment.kt` |
+
+### Background & System
+| Question says... | Open this |
+|---|---|
+| Service / Background / Music / Keep playing after exit | `service/ServiceFragment.kt` + `MyService.kt` |
+| Menu / 3-dot menu / Dark theme / Light theme | `menu/MenuActivity.kt` |
+| Internet check / USB debugging / Location on-off | `security/SecurityFragment.kt` |
+
+---
+
+## 🗺️ PROJECT MAP — Every File in Plain English
+```
+LabExamMasterApp/
+│
+├── MainActivity.kt
+│       The home screen. Shows all buttons at the top.
+│       Each button opens one module below.
+│       Only edit this to add a new button.
+│
+├── alarm/
+│       AlarmFragment.kt     → User types seconds → presses SET ALARM
+│       AlarmReceiver.kt     → Runs when alarm fires → put your action here
+│
+├── broadcast/
+│       BroadcastFragment.kt          → Button sends a broadcast message
+│       BroadcastReceiverExample.kt   → Catches that broadcast → shows Toast
+│
+├── calculator/
+│       CalculatorFragment.kt   → Two number inputs + four buttons (+  −  ×  ÷)
+│
+├── contacts/
+│       ContactsFragment.kt    → Button loads first 5 contacts into a text box
+│
+├── contactscall/
+│       ContactsCallFragment.kt  → Shows all contacts in a 2-line list
+│                                   Tap any contact → calls them directly
+│                                   ⚠ This is an Activity, not a Fragment
+│
+├── contextmenu/
+│       ContextMenuFragment.kt  → Long press a phone number
+│                                  Menu pops up: Call / SMS / WhatsApp
+│                                  ⚠ This is an Activity, not a Fragment
+│
+├── converter/
+│       TemperatureConverterFragment.kt   → Type Celsius → get Fahrenheit
+│
+├── dialer/
+│       DialerFragment.kt   → Type a number → opens the phone dialer
+│
+├── email/
+│       EmailFragment.kt   → Fill To / Subject / Body → opens email app
+│
+├── extras/
+│       ToastFragment.kt   → Button shows a simple Toast popup
+│
+├── feedback/
+│       RatingFragment.kt   → 5-star bar → submit shows the rating
+│
+├── grade/
+│       GradeFragment.kt   → Type marks → shows grade letter
+│
+├── inlinesms/
+│       InlineSmsFragment.kt   → Receives SMS without a separate receiver class
+│                                 Shows sender and message live on screen
+│
+├── listview/
+│       ListViewFragment.kt   → Scrollable list → tap item shows Toast
+│
+├── service/
+│       MyService.kt        → Background service that plays music / ringtone
+│       ServiceFragment.kt  → Two buttons: START SERVICE and STOP SERVICE
+│
+├── sms/
+│       SmsFragment.kt    → Screen that shows incoming SMS live
+│       SmsReceiver.kt    → Catches ALL incoming SMS even when app is closed
+│
+├── snackbartouch/
+│       SnackbarTouchFragment.kt   → Snackbar demo + long press + touch drag events
+│
+└── textwatcher/
+        TextWatcherFragment.kt       → Live typing preview + send 2 numbers to next screen
+        TextWatcherResultActivity.kt → Second screen that shows the result
+```
+
+---
+
+## 5 Steps to Use This in the Exam
+```
+Step 1 — Read the question. Underline the key action words.
+          Example words: "call", "SMS", "service", "grade", "broadcast"
+
+Step 2 — Find that word in the KEYWORD SEARCH table above.
+          Note the folder and file name it points to.
+
+Step 3 — Open that Kotlin file.
+          Find the comment:  // ===== EXAM MODIFICATION AREA =====
+          Change only what is inside that area.
+
+Step 4 — Open the matching XML file if you need to change the screen design.
+          It has the same name as the Kotlin file, just in  res/layout/
+
+Step 5 — Run the app and test it.
+```
+
+---
+
+## ✅ DO and ❌ DO NOT
+
+### In Kotlin Code
+
+| ✅ DO THIS | ❌ NOT THIS |
+|---|---|
+| `view.findViewById<>()` inside Fragments | `findViewById<>()` without `view.` in a Fragment |
+| `requireContext()` when you need Context inside a Fragment | `this` as Context inside a Fragment |
+| `context` for Toast inside a Fragment | `this` for Toast inside a Fragment |
+| `this` as Context inside an Activity | `requireContext()` inside an Activity |
+| Only change code inside `EXAM MODIFICATION AREA` | Randomly edit code outside that area |
+
+### When Copy-Pasting Into a New Project
+
+| ✅ DO THIS | ❌ NOT THIS |
+|---|---|
+| Keep your own `package com.yourname.yourapp` line | Copy the package line from this template |
+| Delete `import com.example.labexammasterapp.R` | Copy that import into your new project |
+| Copy the XML file with the exact same name | Rename the XML without updating the Kotlin |
+| Copy the `<uses-permission>` tags you need | Forget to add permissions to your new Manifest |
+| Register every Activity, Service, Receiver in Manifest | Forget the Manifest registration |
+
+### Converting Fragment to Activity (for most exam questions)
+
+| ✅ DO THIS | ❌ NOT THIS |
+|---|---|
+| Change `: Fragment(R.layout.xxx)` to `: AppCompatActivity()` | Forget to change the class it extends |
+| Change `onViewCreated` to `onCreate` | Leave `onViewCreated` in an Activity |
+| Add `super.onCreate()` and `setContentView()` at top | Forget those two lines |
+| Remove all `view.` from `view.findViewById(...)` | Leave `view.` prefixes in an Activity |
+| Change all `requireContext()` to `this` | Leave `requireContext()` in an Activity |
+
+### In XML Layouts
+
+| ✅ DO THIS | ❌ NOT THIS |
+|---|---|
+| Use `sp` for text size: `android:textSize="18sp"` | Use `dp` for text size |
+| Use `dp` for margins and padding | Use `px` anywhere |
+| Give every view a unique `android:id` | Use the same ID twice in one layout |
+| Add `android:hint="..."` to every EditText | Leave EditText with no hint |
+| Use `android:inputType="number"` for number fields | Leave inputType blank on number fields |
+
+### In AndroidManifest.xml
+
+| ✅ DO THIS | ❌ NOT THIS |
+|---|---|
+| Register every Activity: `<activity android:name=".YourActivity"/>` | Leave any Activity unregistered |
+| Register every Service: `<service android:name=".YourService"/>` | Leave any Service unregistered |
+| Add `android:exported="true"` on receivers that get system broadcasts | Forget it — causes build error on Android 12+ |
+| Add `<uses-feature android:name="android.hardware.telephony" android:required="false"/>` for SMS | Set `required="true"` — blocks install on non-phone devices |
+
+---
+
+## 🔑 Key Android Words — One Line Each
+
+| Word | What it means |
+|---|---|
+| **Activity** | A full screen with its own layout. Must be in Manifest. |
+| **Fragment** | A piece of a screen that lives inside an Activity. |
+| **Service** | Runs in the background with no visible screen. Use for music. |
+| **BroadcastReceiver** | Listens for events (SMS arrived, alarm fired). No UI. |
+| **Intent** | A message that opens Activities, starts Services, or sends Broadcasts. |
+| **PendingIntent** | A future Intent handed to the system to fire later. Used for alarms. |
+| **ContentResolver** | Reads Android's built-in databases (contacts, SMS, calendar). |
+| **Cursor** | The result of a ContentResolver query. Loop through it like a spreadsheet. |
+| **ArrayAdapter** | Connects a text array to a ListView. |
+| **SimpleCursorAdapter** | Connects a database Cursor to a ListView. Shows 2 lines per row. |
+| **Toast** | A small popup. No buttons. Disappears on its own. |
+| **Snackbar** | A bar at the bottom. Can have an action button like UNDO. |
+| **TextWatcher** | Fires on every single keystroke inside an EditText. |
+| **AlarmManager** | The Android system service that runs code at a future time. |
+| **MediaPlayer** | Plays audio files. Use inside a Service so it keeps playing. |
+| **START_STICKY** | Tells Android to restart your Service automatically if it gets killed. |
+| **onResume / onPause** | Register receivers in `onResume`. Always unregister in `onPause`. |
+| **requireContext()** | The safe way to get a Context reference inside a Fragment. |
+| **registerForContextMenu(view)** | Makes a view respond to long press with a menu. |
+
+---
+
+## 🚨 Top 10 Mistakes and How to Fix Them
+
+**1. App crashes the moment it opens**
+The class name in Manifest does not match the actual Kotlin class name.
+Go to AndroidManifest.xml and check every `android:name=".XxxClass"`.
+It must match exactly, letter for letter, including package.
+
+---
+
+**2. Screen is blank after fragment loads**
+You used `findViewById` without `view.` inside a Fragment.
+Inside a Fragment it is always `view.findViewById<Type>(R.id.yourId)`.
+
+---
+
+**3. Contacts list is empty even though permission is in Manifest**
+Manifest permission alone is not enough on Android 6 and above.
+You must also ask the user at runtime using `ActivityCompat.requestPermissions()`.
+Copy the pattern from `ContactsFragment.kt` — it already handles this correctly.
+
+---
+
+**4. SMS never arrives in the app**
+Two possible causes:
+- The action string in `sendBroadcast()` does not exactly match the `<action>` in Manifest.
+- You are testing wrong. On the emulator click `...` on the side panel → Phone tab → Send Message.
+
+---
+
+**5. Service starts but no music plays**
+`MyService.kt` in this project already has `MediaPlayer.create(this, Settings.System.DEFAULT_RINGTONE_URI)`.
+If your copy does not, add that line inside `onStartCommand`.
+
+---
+
+**6. Pasted code and now it will not compile**
+You copied the `package com.example.labexammasterapp` line.
+Delete it. Keep only your own project's package line at the very top.
+
+---
+
+**7. Red error: Cannot resolve symbol R**
+One of your XML files has a syntax error. Even one missing `>` breaks everything.
+Look at every XML file in Android Studio for red underlines.
+Fix the error then go to Build → Clean Project → Rebuild Project.
+
+---
+
+**8. WhatsApp button does nothing on newer phones**
+You are missing the `<queries>` block in Manifest.
+Add this just before the closing `</manifest>` tag:
+```xml
+<queries>
+    <package android:name="com.whatsapp"/>
+    <package android:name="com.whatsapp.w4b"/>
+</queries>
+```
+
+---
+
+**9. DatePicker shows the wrong month**
+Android months start from 0. January = 0, December = 11.
+Always add 1 when you read it: `datePicker.month + 1`
+
+---
+
+**10. Copied Fragment but Activity won't start**
+If you turned a Fragment into an Activity (for your exam project), you must also register it in Manifest.
+Add `<activity android:name=".YourClassName"/>` inside the `<application>` block.
+
+---
+
+## ✔️ Before You Submit — Quick Checklist
+```
+□  App opens without crashing
+□  The main feature works and shows a result on screen
+□  If two screens needed — data passes correctly to screen 2
+□  Permission dialog appears on first run (for call / SMS / contacts)
+□  Service starts and stops without crashing
+□  All EditTexts show hint text and have correct inputType
+□  No red errors visible in Android Studio
+□  Manifest has all permissions, activities, services, and receivers
+```
+
+---
+
+*Paste everything above this line at the bottom of your existing README.md*
