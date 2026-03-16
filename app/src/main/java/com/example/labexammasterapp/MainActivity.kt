@@ -29,6 +29,7 @@ import com.example.labexammasterapp.contactscall.ContactsCallFragment
 import com.example.labexammasterapp.textwatcher.TextWatcherFragment
 import com.example.labexammasterapp.snackbartouch.SnackbarTouchFragment
 import com.example.labexammasterapp.contextmenu.ContextMenuFragment
+import android.content.Intent
 
 class MainActivity : AppCompatActivity() {
 
@@ -74,10 +75,10 @@ class MainActivity : AppCompatActivity() {
         btnRating.setOnClickListener { loadFragment(RatingFragment()) }
         btnToast.setOnClickListener { loadFragment(ToastFragment()) }
         btnInlineSms.setOnClickListener { loadFragment(InlineSmsFragment()) }
-        btnContactsCall.setOnClickListener { loadFragment(ContactsCallFragment()) }
+        btnContactsCall.setOnClickListener { startActivity(Intent(this, ContactsCallFragment::class.java)) }
         btnTextWatcher.setOnClickListener { loadFragment(TextWatcherFragment()) }
         btnSnackbarTouch.setOnClickListener { loadFragment(SnackbarTouchFragment()) }
-        btnContextMenu.setOnClickListener { loadFragment(ContextMenuFragment()) }
+        btnContextMenu.setOnClickListener  { startActivity(Intent(this, ContextMenuFragment::class.java)) }
         // ==================================
     }
 
