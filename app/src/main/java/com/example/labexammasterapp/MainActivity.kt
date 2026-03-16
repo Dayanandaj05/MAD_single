@@ -24,6 +24,11 @@ import com.example.labexammasterapp.converter.TemperatureConverterFragment
 import com.example.labexammasterapp.calculator.CalculatorFragment
 import com.example.labexammasterapp.feedback.RatingFragment
 import com.example.labexammasterapp.extras.ToastFragment
+import com.example.labexammasterapp.inlinesms.InlineSmsFragment
+import com.example.labexammasterapp.contactscall.ContactsCallFragment
+import com.example.labexammasterapp.textwatcher.TextWatcherFragment
+import com.example.labexammasterapp.snackbartouch.SnackbarTouchFragment
+import com.example.labexammasterapp.contextmenu.ContextMenuFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,6 +50,11 @@ class MainActivity : AppCompatActivity() {
         val btnCalculator = findViewById<Button>(R.id.btnCalculator)
         val btnRating = findViewById<Button>(R.id.btnRating)
         val btnToast = findViewById<Button>(R.id.btnToast)
+        val btnInlineSms = findViewById<Button>(R.id.btnInlineSms)
+        val btnContactsCall = findViewById<Button>(R.id.btnContactsCall)
+        val btnTextWatcher = findViewById<Button>(R.id.btnTextWatcher)
+        val btnSnackbarTouch = findViewById<Button>(R.id.btnSnackbarTouch)
+        val btnContextMenu = findViewById<Button>(R.id.btnContextMenu)
 
         // ===== EXAM MODIFICATION AREA =====
         // Delete or comment out buttons you do NOT need for your exam.
@@ -63,6 +73,11 @@ class MainActivity : AppCompatActivity() {
         btnCalculator.setOnClickListener { loadFragment(CalculatorFragment()) }
         btnRating.setOnClickListener { loadFragment(RatingFragment()) }
         btnToast.setOnClickListener { loadFragment(ToastFragment()) }
+        btnInlineSms.setOnClickListener { loadFragment(InlineSmsFragment()) }
+        btnContactsCall.setOnClickListener { loadFragment(ContactsCallFragment()) }
+        btnTextWatcher.setOnClickListener { loadFragment(TextWatcherFragment()) }
+        btnSnackbarTouch.setOnClickListener { loadFragment(SnackbarTouchFragment()) }
+        btnContextMenu.setOnClickListener { loadFragment(ContextMenuFragment()) }
         // ==================================
     }
 

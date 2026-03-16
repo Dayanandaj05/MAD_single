@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Snackbar + Touch Listener Demo"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvSnackTarget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TAP ME for Snackbar\nLONG PRESS to resize"
+        android:textSize="22sp"
+        android:textColor="#1565C0"
+        android:layout_marginTop="20dp"
+        android:padding="16dp"
+        android:background="#E3F2FD" />
+
+    <TextView
+        android:id="@+id/tvTouchTarget"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="TOUCH ME (drag finger)"
+        android:textSize="22sp"
+        android:textColor="#880E4F"
+        android:layout_marginTop="20dp"
+        android:padding="16dp"
+        android:background="#FCE4EC" />
+
+    <TextView
+        android:id="@+id/tvTouchStatus"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Touch status: none"
+        android:textSize="14sp"
+        android:layout_marginTop="8dp" />
+
+    <Button
+        android:id="@+id/btnOpenUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="OPEN PSG TECH WEBSITE"
+        android:layout_marginTop="20dp" />
+
+</LinearLayout>
