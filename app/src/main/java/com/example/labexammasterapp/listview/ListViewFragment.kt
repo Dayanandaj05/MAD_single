@@ -39,7 +39,7 @@ class ListViewFragment : Fragment(R.layout.fragment_listview) {
         listView.setOnItemClickListener { parent, itemView, position, id ->
             // ===== EXAM MODIFICATION AREA =====
             val clickedItem = dataList[position]
-            Toast.makeText(requireContext(), "You clicked: $clickedItem", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "You clicked: $clickedItem", Toast.LENGTH_SHORT).show()
             // ==================================
         }
     }

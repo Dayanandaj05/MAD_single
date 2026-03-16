@@ -23,7 +23,7 @@ class ToastFragment : Fragment(R.layout.fragment_toast) {
 
         btnShowToast.setOnClickListener {
             // ===== EXAM MODIFICATION AREA =====
-            Toast.makeText(requireContext(), "Simple Toast Message!", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Simple Toast Message!", Toast.LENGTH_SHORT).show()
             // ==================================
         }
     }

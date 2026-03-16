@@ -26,7 +26,7 @@ class RatingFragment : Fragment(R.layout.fragment_rating) {
         btnSubmit.setOnClickListener {
             // ===== EXAM MODIFICATION AREA =====
             val stars = ratingBar.rating
-            Toast.makeText(requireContext(), "You rated: $stars stars", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "You rated: $stars stars", Toast.LENGTH_SHORT).show()
             // ==================================
         }
     }
